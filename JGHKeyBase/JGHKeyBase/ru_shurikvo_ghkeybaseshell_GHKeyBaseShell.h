@@ -21,7 +21,16 @@ JNIEXPORT jint JNICALL Java_ru_shurikvo_ghkeybaseshell_GHKeyBaseShell_PackKey
  * Signature: ([B[B)I
  */
 JNIEXPORT jint JNICALL Java_ru_shurikvo_ghkeybaseshell_GHKeyBaseShell_GetKey
-  (JNIEnv *, jclass, jbyteArray, jbyteArray);
+(JNIEnv *, jclass, jbyteArray, jbyteArray);
+
+/*
+ * Class:     ru_shurikvo_ghkeybaseshell_GHKeyBaseShell
+ * Method:    GetKCV
+ * Signature: ([B[B)I
+ */
+
+JNIEXPORT jint JNICALL Java_ru_shurikvo_ghkeybaseshell_GHKeyBaseShell_GetKCV
+(JNIEnv *, jclass, jbyteArray, jbyteArray);
 
 /*
  * Class:     ru_shurikvo_ghkeybaseshell_GHKeyBaseShell

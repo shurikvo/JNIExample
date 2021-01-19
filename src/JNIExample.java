@@ -10,25 +10,47 @@ public class JNIExample {
 
     public static void main(String[] args){
         int[] N = new int[1];
-        byte[] key = new byte[16];
 
         ByteMatter Byt = new ByteMatter();
-
-        N[0] = 10;
-        System.out.println("RC: " + TryInt(N));
-        System.out.println("Rz: " + N[0]);
-        //System.out.println("Lb: " + System.getProperty("java.library.path"));
-        //System.setProperty("java.library.path", "E:\\Java\\DLL\\JGHKeyBase\\x64\\Release");
-        //System.out.println("Lb: " + System.getProperty("java.library.path"));
-
-        byte[] pack = Byt.toByteArray("6D4F74D4734E14203923804E67A8AA0EE7402890CAA3552B1207681F802BC390E116F0DE7FAEAA0ECA8CAED6B9E2C57A65CB4DE0859BB5806B544C06DE741B8CA9B97058576357A0A15DCDA545C6D804DCEDE14B2C337A362E5B205DE1E25108FC8074AF5BE15C877B0C87E792F5EFCB0363805800C2CB44A6501C6D252FDB3B");
+        byte[] kcv = Byt.toByteArray("0000000000000000"),
+                key = Byt.toByteArray("00000000000000000000000000000000"),
+                pack = Byt.toByteArray("59339816BA08CCA0462E924685FC77E844EDB7CF2595F9F53A1097423BC74684E06166EFE05F748A4A54998871CBC2B7392AB802A3F868CC84CB57D434718396280B7925E17461107181218F65C52016D3276F9C1E107FD35EDBBA31D87E464CDB3DCA85F5EF1E228A02AFF6FAF706677A1C9186B63F71CEDC1B3370F9FD8972");
 
         GHKeyBaseShell Shell = new GHKeyBaseShell();
-        //Shell.PackKey(key, pack);
-        //System.out.println("Key: " + Byt.toHexString(key) + " pack: " + Byt.toHexString(pack));
 
         System.out.println("Pack: " + Byt.toHexString(pack));
+        System.out.println(" Key: " + Byt.toHexString(key));
+
         Shell.GetKey(pack, key);
-        System.out.println("Key: " + Byt.toHexString(key) + " pack: " + Byt.toHexString(pack));
+
+        System.out.println("GetKey: ");
+        System.out.println("Pack: " + Byt.toHexString(pack));
+        System.out.println(" Key: " + Byt.toHexString(key));
+
+        Shell.GetKCV(key, kcv);
+
+        System.out.println("GetKCV: ");
+        System.out.println(" KCV: " + Byt.toHexString(kcv));
+
+        Shell.PackKey(key, pack);
+
+        System.out.println("PackKey: ");
+        System.out.println("Pack: " + Byt.toHexString(pack));
+        System.out.println(" Key: " + Byt.toHexString(key));
+
+        key = Byt.toByteArray("00112233445566778899AABBCCDDEEFF");
+        System.out.println(" Key: " + Byt.toHexString(key));
+
+        Shell.PackKey(key, pack);
+
+        System.out.println("PackKey: ");
+        System.out.println("Pack: " + Byt.toHexString(pack));
+        System.out.println(" Key: " + Byt.toHexString(key));
+
+        Shell.GetKey(pack, key);
+
+        System.out.println("GetKey: ");
+        System.out.println("Pack: " + Byt.toHexString(pack));
+        System.out.println(" Key: " + Byt.toHexString(key));
     }
 }

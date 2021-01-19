@@ -12,6 +12,9 @@
 // Файлы заголовков Windows
 #include <windows.h>
 
+#include "GHKeyBase.h"
+
+extern GHKeyBase Bky;
 
 
 // установите здесь ссылки на дополнительные заголовки, требующиеся для программы

@@ -1,6 +1,8 @@
 ﻿// dllmain.cpp : Определяет точку входа для приложения DLL.
 #include "stdafx.h"
 
+GHKeyBase Bky;
+
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
@@ -14,6 +16,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     case DLL_PROCESS_DETACH:
         break;
     }
+	Bky.Init();
     return TRUE;
 }
 

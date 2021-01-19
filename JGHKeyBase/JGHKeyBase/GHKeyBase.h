@@ -29,11 +29,10 @@ public:
 
 	int Init();
 	int GetKey(unsigned char *Pack, unsigned char *Key);
+	int GetKCV(unsigned char *Key, unsigned char *KCV);
+	int PackKey(unsigned char *Key, unsigned char *Pack);
+	int PackArray(unsigned char *Cipher, int CiLen, unsigned char *Crypt, int *pCryLen);
+	int GetArray(unsigned char *Crypt, int CryLen, unsigned char *Cipher, int *pCiLen);
 };
-
-
-
-
-
 
 #endif //__GHKEYBASE_H__

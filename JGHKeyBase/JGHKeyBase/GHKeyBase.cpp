@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "GHKeyBase.h"
 
 	HINSTANCE hDllGHKB = NULL;
 	GHKEYBASE_API_GET	hGetKey = NULL;
@@ -8,14 +7,50 @@
 	GHKEYBASE_API_PARC	hPackArc = NULL;
 	GHKEYBASE_API_GARC	hGetArc = NULL;
 
-int GHKeyBase::GetKey(unsigned char *bCrypto, unsigned char *bKey)
-{
-	int RC;
+	int GHKeyBase::GetKey(unsigned char *bCrypto, unsigned char *bKey)
+	{
+		int RC;
 
-	RC =  (hGetKey)(bCrypto,bKey);
+		RC = (hGetKey)(bCrypto, bKey);
 
-	return RC;
-}
+		return RC;
+	}
+
+	int GHKeyBase::GetKCV(unsigned char *bKey, unsigned char *bKCV)
+	{
+		int RC;
+
+		RC = (hGetKCV)(bKey, bKCV);
+
+		return RC;
+	}
+
+	int GHKeyBase::PackKey(unsigned char *bKey, unsigned char *bCrypto)
+	{
+		int RC;
+
+		RC = (hPackKey)(bKey, bCrypto);
+
+		return RC;
+	}
+
+	int GHKeyBase::PackArray(unsigned char *Cipher, int CiLen, unsigned char *Crypt, int *pCryLen)
+	{
+		int RC;
+
+		RC = (hPackArc)(Cipher, CiLen, Crypt, pCryLen);
+
+		return RC;
+	}
+
+	int GHKeyBase::GetArray(unsigned char *Crypt, int CryLen, unsigned char *Cipher, int *pCiLen)
+	{
+		int RC;
+
+		RC = (hPackArc)(Crypt, CryLen, Cipher, pCiLen);
+
+		return RC;
+	}
 
 int GHKeyBase::Init()
 {
@@ -31,11 +66,51 @@ int GHKeyBase::Init()
 		return -1;
 	}
 
-	sprintf_s(sFunc,"GetKey");
-	hGetKey = (GHKEYBASE_API_GET)GetProcAddress(hDllGHKB,sFunc);
-	if(hGetKey == NULL)
+	sprintf_s(sFunc, "GetKey");
+	hGetKey = (GHKEYBASE_API_GET)GetProcAddress(hDllGHKB, sFunc);
+	if (hGetKey == NULL)
 	{
-		sprintf_s(Message, "Cannot get proc addres %s",sFunc);
+		sprintf_s(Message, "Cannot get proc addres %s", sFunc);
+		FreeLibrary(hDllGHKB);
+		hDllGHKB = NULL;
+		return -2;
+	}
+
+	sprintf_s(sFunc, "GetKCV");
+	hGetKCV = (GHKEYBASE_API_KCV)GetProcAddress(hDllGHKB, sFunc);
+	if (hGetKCV == NULL)
+	{
+		sprintf_s(Message, "Cannot get proc addres %s", sFunc);
+		FreeLibrary(hDllGHKB);
+		hDllGHKB = NULL;
+		return -2;
+	}
+
+	sprintf_s(sFunc, "PackKey");
+	hPackKey = (GHKEYBASE_API_PACK)GetProcAddress(hDllGHKB, sFunc);
+	if (hPackKey == NULL)
+	{
+		sprintf_s(Message, "Cannot get proc addres %s", sFunc);
+		FreeLibrary(hDllGHKB);
+		hDllGHKB = NULL;
+		return -2;
+	}
+
+	sprintf_s(sFunc, "PackArray");
+	hPackArc = (GHKEYBASE_API_PARC)GetProcAddress(hDllGHKB, sFunc);
+	if (hPackArc == NULL)
+	{
+		sprintf_s(Message, "Cannot get proc addres %s", sFunc);
+		FreeLibrary(hDllGHKB);
+		hDllGHKB = NULL;
+		return -2;
+	}
+
+	sprintf_s(sFunc, "GetArray");
+	hGetArc = (GHKEYBASE_API_GARC)GetProcAddress(hDllGHKB, sFunc);
+	if (hGetArc == NULL)
+	{
+		sprintf_s(Message, "Cannot get proc addres %s", sFunc);
 		FreeLibrary(hDllGHKB);
 		hDllGHKB = NULL;
 		return -2;
