@@ -47,7 +47,7 @@ int GHKeyBase::Init()
 GHKeyBase::GHKeyBase()
 {
 	//sprintf_s(DllPath, "C:\\Rosan\\Handlers\\GHKeyBase.dll");
-	sprintf_s(DllPath, "GHKeyBase.dll");
+	sprintf_s(DllPath, "GHKeyBase_64.dll");
 	sprintf_s(Message,"");
 }
 
