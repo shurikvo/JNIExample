@@ -47,7 +47,7 @@
 	{
 		int RC;
 
-		RC = (hPackArc)(Crypt, CryLen, Cipher, pCiLen);
+		RC = (hGetArc)(Crypt, CryLen, Cipher, pCiLen);
 
 		return RC;
 	}
